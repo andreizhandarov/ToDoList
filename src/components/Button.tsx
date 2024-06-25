@@ -1,13 +1,14 @@
 import React from 'react';
 
-type ButtonPropsType ={
-    title: string
+export type ButtonPropsType ={
+    title: string;
+    onClick?: ()=> void;
 }
 
-export const Button = (props: ButtonPropsType) => {
+export const Button = ({title, onClick}: ButtonPropsType) => {
     return (
-        <button>
-            {props.title}
+        <button onClick={onClick}>
+            {title}
         </button>
     );
 };
