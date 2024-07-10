@@ -2,22 +2,13 @@ import React, { ChangeEvent, KeyboardEvent } from "react";
 
 type InputPropsType = {
   taskTitle: string,
-  setTastTitle: (taskTitle: string) => void,
-  callBack: () => void
+  onChange?: () => void
+  onKeyUp?: () => void
 };
 
-export const Input = ({taskTitle, setTastTitle,callBack}: InputPropsType) => {
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setTastTitle(e.currentTarget.value);
-  };
-
-  const onKeyUpHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      callBack();
-    }
-  };
-
+export const Input = ({taskTitle, onChange, onKeyUp}: InputPropsType) => {
   return (
-    <input value={taskTitle} onChange={onChangeHandler} onKeyUp={onKeyUpHandler} />
+    <input value={taskTitle} onChange={onChange} onKeyUp={onKeyUp}/>
   );
 };
+

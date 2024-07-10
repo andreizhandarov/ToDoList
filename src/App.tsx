@@ -27,12 +27,17 @@ function App() {
     setTasks([newTitleTasks, ...tasks]);
   }
 
+  const chengeTask = (event : boolean, taskID : string) => {
+    setTasks(tasks.map((el) => el.id === taskID ? {...el, isDone : event} : el))
+  }
+
   return (
     <div className="App">
       <Todolist title="What to learn" 
                 tasks={tasks} 
                 removeTask={removeTask}
                 addTask={addTask}
+                chengeTask={chengeTask}
                 />
     </div>
   );
