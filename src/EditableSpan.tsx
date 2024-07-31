@@ -1,3 +1,4 @@
+import { TextField } from '@mui/material';
 import React, { ChangeEvent, useState } from 'react';
 
 type EditableSpanPropsType = {
@@ -7,12 +8,10 @@ type EditableSpanPropsType = {
 
 export const EditableSpan = ({title, changeTitle}: EditableSpanPropsType) => {
     const [editMode, setEditMode] = useState(false);
-    const [itemTitle, setItemTitle] = useState(title);
-
+    const [itemTitle, setItemTitle] = useState(title)
     const changeItemTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		setItemTitle(event.currentTarget.value)
 	}
-    
     const onEditMode = () => setEditMode(true)
     const offEditMode = () => {
         setEditMode(false)
@@ -22,7 +21,13 @@ export const EditableSpan = ({title, changeTitle}: EditableSpanPropsType) => {
     return (
         <>
         {editMode ? (
-            <input value={itemTitle} autoFocus onBlur={offEditMode} onChange={changeItemTitleHandler}/>
+            <TextField
+                variant={'outlined'}
+                value={itemTitle}
+                size={'small'} 
+                autoFocus 
+                onBlur={offEditMode} 
+                onChange={changeItemTitleHandler}/>
         ):(
             <span onDoubleClick={onEditMode}>{title}</span>
         )}

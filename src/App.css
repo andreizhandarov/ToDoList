@@ -1,4 +1,4 @@
-.App {
+/* .App {
   padding: 30px;
   display: flex;
 }
@@ -10,15 +10,20 @@
 .error {
   border: red 1px solid;
 }
- 
+
 .error-message {
   color: red;
 }
 
 .active-filter {
-  background-color: rgb(68, 224, 198);
-}
+  background-color: lightgreen;
+} */
 
-.is-done {
+/* .is-done {
   opacity: 0.5;
 }
+
+.todolist-title-container {
+  display: flex;
+  align-items: center;
+} */
