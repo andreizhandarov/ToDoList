@@ -1,6 +1,8 @@
 import { v1 } from "uuid"
 import {TaskType, TasksStateType} from "../App"
+import { AddTodolistActionType, RemoveTodolistActionType } from "./todolists-reducer"
 
+//export type RemoveTaskActionType = ReturnType<typeof removeTaskAC>
 export type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
     payload: {
@@ -36,9 +38,9 @@ export type ChangeTaskTitleActionType = {
   }
 }
 
-type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusActionType | ChangeTaskTitleActionType
+type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusActionType | ChangeTaskTitleActionType | AddTodolistActionType | RemoveTodolistActionType
 
-export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
+export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK': {
             return {
@@ -52,7 +54,7 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
             title: action.payload.title,
             isDone: false
           }
-          return {...state, [action.payload.todolistId]: [...state[action.payload.todolistId], newTask]}
+          return {...state, [action.payload.todolistId]: [newTask, ...state[action.payload.todolistId]]}
         }
         case 'CHANGE-TASK-STATUS': {
           return{
@@ -63,6 +65,16 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType) => {
           return{
             ...state, [action.payload.todolistId]: state[action.payload.todolistId].map(t => t.id == action.payload.id ? {...t, title: action.payload.title} : t)
           }
+        }
+        case 'ADD-TODOLIST':{
+          return {
+            ...state, [action.payload.id] : []
+          }
+        }
+        case 'REMOVE-TODOLIST': {
+          const copyState = { ...state };
+          delete copyState[action.payload.id];
+          return copyState;
         }
         default:
           throw new Error("I don't understand this type")

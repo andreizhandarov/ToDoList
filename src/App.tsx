@@ -69,7 +69,7 @@ function App() {
 			title: title,
 			isDone: false
 		}
-		setTasks({...tasks, [todolistId]: [...tasks[todolistId], newTask]})
+		setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
 	}
 
 	const changeTaskStatus = (taskId: string, taskStatus: boolean, todolistId : string) => {
