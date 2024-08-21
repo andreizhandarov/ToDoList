@@ -1,4 +1,4 @@
-import {FilterValuesType, TaskType} from "./App";
+import {FilterValuesType, TaskType} from "./AppWithRedux";
 import {ChangeEvent} from "react";
 //import {Button} from "./Button";
 import { AddItemForm } from "./AddItemForm";

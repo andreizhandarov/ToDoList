@@ -1,6 +1,6 @@
 import {  addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, removeTodolistAC, todolistsReducer } from './todolists-reducer'
 import { v1 } from 'uuid'
-import { TodolistType } from '../App'
+import { TodolistType } from '../AppWithRedux'
 
 let todolistId1: string
 let todolistId2: string
@@ -31,7 +31,7 @@ const newTitle = 'New Todolist'
 const endState = todolistsReducer(startState, addTodolistAC(v1(), newTitle))
 
   expect(endState.length).toBe(3)
-  expect(endState[2].title).toBe(newTitle)
+  expect(endState[0].title).toBe(newTitle)
 })
 
 test('correct todolist should change its name', () => {
