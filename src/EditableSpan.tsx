@@ -6,12 +6,16 @@ type EditableSpanPropsType = {
     changeTitle: (newTitle: string) => void
 }
 
-export const EditableSpan = ({title, changeTitle}: EditableSpanPropsType) => {
+export const EditableSpan = React.memo(({title, changeTitle}: EditableSpanPropsType) => {
+    console.log('EditableSpan is called');
+
     const [editMode, setEditMode] = useState(false);
     const [itemTitle, setItemTitle] = useState(title)
+
     const changeItemTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		setItemTitle(event.currentTarget.value)
 	}
+
     const onEditMode = () => setEditMode(true)
     const offEditMode = () => {
         setEditMode(false)
@@ -33,5 +37,5 @@ export const EditableSpan = ({title, changeTitle}: EditableSpanPropsType) => {
         )}
         </>
     );
-};
+});
 
