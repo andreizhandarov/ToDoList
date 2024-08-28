@@ -33,8 +33,8 @@ export const TaskComponent = React.memo((props: TaskPropsType) => {
 
 	return <ListItem key={task.id} sx={getListItemSx(task.isDone)}>
 		<div>
-		<Checkbox color={'secondary'} checked={task.isDone} onChange={changeTaskStatusHandler}/>
-		<EditableSpan title={task.title} changeTitle={changeTaskTitleCallback}/>
+			<Checkbox color={'secondary'} checked={task.isDone} onChange={changeTaskStatusHandler}/>
+			<EditableSpan title={task.title} changeTitle={changeTaskTitleCallback}/>
 		</div>
 		
 		<IconButton  onClick={removeTaskHandler}>
