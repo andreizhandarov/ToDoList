@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useCallback } from 'react';
-import { TaskType } from './AppWithRedux';
+import { TaskType } from './AppWithReducers';
 import ListItem from "@mui/material/ListItem";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";

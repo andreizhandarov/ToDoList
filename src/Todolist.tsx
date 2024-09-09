@@ -1,4 +1,4 @@
-import {FilterValuesType, TaskType} from "./AppWithRedux";
+import {FilterValuesType, TaskType} from "./AppWithRedux/hooks/useAppWithRedux";
 import {useCallback, useMemo} from "react";
 import { AddItemForm } from "./AddItemForm";
 import { EditableSpan } from "./EditableSpan";
