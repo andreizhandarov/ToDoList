@@ -3,11 +3,10 @@ import React, { ChangeEvent, useState } from 'react';
 
 type EditableSpanPropsType = {
     title: string,
-    changeTitle: (newTitle: string) => void
+    changeTitle: (newTitle: string) => void,
 }
 
 export const EditableSpan = React.memo(({title, changeTitle}: EditableSpanPropsType) => {
-    console.log('EditableSpan is called');
 
     const [editMode, setEditMode] = useState(false);
     const [itemTitle, setItemTitle] = useState(title)
@@ -16,7 +15,7 @@ export const EditableSpan = React.memo(({title, changeTitle}: EditableSpanPropsT
 		setItemTitle(event.currentTarget.value)
 	}
 
-    const onEditMode = () => setEditMode(true)
+    const onEditMode = () => setEditMode(true) 
     const offEditMode = () => {
         setEditMode(false)
         changeTitle(itemTitle)

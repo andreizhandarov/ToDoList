@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {action} from '@storybook/addon-actions'
-import { AddItemForm, AddItemFormPropsType } from '../AddItemForm';
+import { AddItemForm, AddItemFormPropsType } from '../components/AddItemForm/AddItemForm';
 import React, { ChangeEvent, useState, KeyboardEvent } from 'react';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
@@ -88,6 +88,6 @@ export const AddItemFormWithErrorStory = () => {
     return <AddItemFormWithError addItem={action('Button clicked inside form')}/>
 }
 
-export const AddItemFormWithErrorStoryNew =  {
-    render: () => <AddItemFormWithError addItem={action('Button clicked inside form')}/>
-}
+// export const AddItemFormWithErrorStoryNew =  {
+//     render: () => <AddItemFormWithError addItem={action('Button clicked inside form')}/>
+// }

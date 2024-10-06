@@ -1,15 +1,16 @@
 import { TextField } from '@mui/material';
 import AddBoxIcon from '@mui/icons-material/AddBox'
 import IconButton from '@mui/material/IconButton'
-import React, { useCallback } from 'react';
+import React from 'react';
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 
 
-type AddItemFormPropsType = {
+export type AddItemFormPropsType = {
     addItem: (newTitle: string) => void
+	disabled?: boolean
 }
 
-export const AddItemForm = React.memo(({addItem}: AddItemFormPropsType) => {
+export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormPropsType) => {
 	console.log('AddItemForm is called')
     const [itemTitle, setItemTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -39,6 +40,7 @@ export const AddItemForm = React.memo(({addItem}: AddItemFormPropsType) => {
     return (
         <div>
 				<TextField
+					disabled={disabled}
 					label='Enter a title'
 					variant='outlined'
 					size='small'
@@ -48,7 +50,7 @@ export const AddItemForm = React.memo(({addItem}: AddItemFormPropsType) => {
 					onChange={changeItemTitleHandler}
 					onKeyUp={addItemOnKeyUpHandler}
 				/>
-				<IconButton onClick={addItemHandler} color='primary'>
+				<IconButton onClick={addItemHandler} color='primary' disabled={disabled}>
 					<AddBoxIcon />
 				</IconButton>
 			</div>
