@@ -1,6 +1,6 @@
 import AppBar from '@mui/material/AppBar';
 import './App.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -9,19 +9,24 @@ import { MenuButton } from '../components/MenuButton/MenuButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Switch from '@mui/material/Switch'
 import CssBaseline from '@mui/material/CssBaseline'
-import { TodolistsList } from '../features/TodolistsList/TodolistsList';
-import { LinearProgress } from '@mui/material';
+import { CircularProgress, LinearProgress } from '@mui/material';
 import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
-import { AppRootStateType } from './state/store';
+import { useAppDispatch, useAppSelector } from './state/store';
 import { RequestStatusType } from './app-reducer';
-import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import { meTC } from '../features/Login/auth-reducer';
 
 type ThemeMode = 'dark' | 'light'
 
 function AppWithRedux() {
+	const dispatch = useAppDispatch()
+	const status = useAppSelector<RequestStatusType>(state => state.app.status)
+	const isInitialized = useAppSelector<boolean>(state => state.app.isInitialized)
 
-	const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-	
+	useEffect(() => {
+		dispatch(meTC())
+	}, [])
+
 	//UI
 	const [themeMode, setThemeMode] = useState<ThemeMode>('light')
 	const theme = createTheme({
@@ -35,6 +40,14 @@ function AppWithRedux() {
 
 	const onChangeHandler = () => {
 		setThemeMode(themeMode == 'light' ? 'dark' : 'light')
+	}
+
+	if(!isInitialized){
+		return (
+			<div style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+				<CircularProgress/>
+			</div>
+		)
 	}
 
 	return (
@@ -57,7 +70,7 @@ function AppWithRedux() {
 			</AppBar>
 
 			<Container fixed>
-				<TodolistsList />
+				<Outlet/>
 			</Container>
 		</ThemeProvider>
 	);

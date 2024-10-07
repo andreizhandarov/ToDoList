@@ -7,14 +7,19 @@ import { AddItemForm } from '../../components/AddItemForm/AddItemForm';
 import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
 import { Todolist } from './Todolist/Todolist';
-import { AppRootStateType, useAppDispatch } from '../../app/state/store';
+import { useAppDispatch, useAppSelector } from '../../app/state/store';
+import { Navigate } from 'react-router-dom';
 
 export const TodolistsList: React.FC = () => {
-    const todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
-    const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
+    const todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists)
+    const tasks = useAppSelector<TasksStateType>(state => state.tasks)
+	const isLoggenIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch();
 
 	useEffect(() => {
+		if(!isLoggenIn){
+			return;
+		}
 		dispatch(getTodolistsTC())
 	}, [])
 
@@ -59,6 +64,10 @@ export const TodolistsList: React.FC = () => {
         const thunk = deleteTodolistTC(todolistId)
         dispatch(thunk)
 	},[])
+
+	if(!isLoggenIn){
+        return <Navigate to={'/login'} />
+    }
 
     return (
         <>
