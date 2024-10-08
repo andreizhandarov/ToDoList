@@ -17,7 +17,6 @@ export type TodolistType = {
     addedDate: string
 }
 
-//generic CreateTodolistResponseType, UpdateTodolistResponseType, DeleteTodolistResponseType
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
@@ -78,7 +77,9 @@ export const authAPI = {
     login(data: LoginType) {
         return instance.post<ResponseType<{userId: number}>, AxiosResponse<ResponseType<{ userId: number }>>, LoginType>(`auth/login`, data);
     },
-    logOut() {},
+    logOut() {
+        return instance.delete<ResponseType>(`auth/login`)
+    },
     me() {
         return instance.get<ResponseType<UserType>>(`auth/me`)
     }
@@ -89,7 +90,7 @@ export const todolistAPI = {
         return instance.get<TodolistType[]>(`todo-lists`)
     },
     createTodolist(title: string){
-        return instance.post<ResponseType<{item: TodolistType}>>(`todo-lists` , { title })
+        return instance.post<ResponseType<{item: TodolistType}>>(`todo-lists`, { title })
     },
     deleteTodolist(todolistId: string){
         return instance.delete<ResponseType>(`todo-lists/${todolistId}`)
@@ -104,7 +105,7 @@ export const taskAPI = {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string){
-        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks` , { title })
+        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, { title })
     },
     deleteTask(todolistId: string, taskId: string){
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)

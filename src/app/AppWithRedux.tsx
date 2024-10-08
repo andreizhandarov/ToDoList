@@ -13,8 +13,8 @@ import { CircularProgress, LinearProgress } from '@mui/material';
 import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
 import { useAppDispatch, useAppSelector } from './state/store';
 import { RequestStatusType } from './app-reducer';
-import { Outlet } from 'react-router-dom';
-import { meTC } from '../features/Login/auth-reducer';
+import { Navigate, Outlet } from 'react-router-dom';
+import { logOutTC, meTC } from '../features/Login/auth-reducer';
 
 type ThemeMode = 'dark' | 'light'
 
@@ -22,6 +22,11 @@ function AppWithRedux() {
 	const dispatch = useAppDispatch()
 	const status = useAppSelector<RequestStatusType>(state => state.app.status)
 	const isInitialized = useAppSelector<boolean>(state => state.app.isInitialized)
+	const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+
+	const logOut = () => {
+		dispatch(logOutTC())
+	}
 
 	useEffect(() => {
 		dispatch(meTC())
@@ -60,8 +65,7 @@ function AppWithRedux() {
 						<MenuIcon />
 					</IconButton>
 					<div>
-						<MenuButton>Login</MenuButton>
-						<MenuButton>Logout</MenuButton>
+						{isLoggedIn && <MenuButton onClick={logOut}>Logout</MenuButton>}
 						<MenuButton sx={{background: '#ab47bc'}}>FAQ</MenuButton>
 						<Switch color={'default'} onChange={onChangeHandler}/>
 					</div>

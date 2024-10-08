@@ -31,13 +31,11 @@ type PropsType = {
 export const Todolist = React.memo((props: PropsType) => {
 	const {todolist, tasks, changeFilter, addTask, removeTodolist, changeTodolistTitle, removeTask, changeTaskStatus, changeTaskTitle} = props
 
-	console.log('Todolist is called')
-
 	const dispatch = useAppDispatch();
 	
-	useEffect(() => {
-		dispatch(fetchTasksTC(todolist.id))
-	}, [])
+	// useEffect(() => {
+	// 	dispatch(fetchTasksTC(todolist.id))
+	// }, [])
 
 	const addTaskCallBack = useCallback((taskTitle: string) => {
 		addTask(taskTitle, todolist.id)
