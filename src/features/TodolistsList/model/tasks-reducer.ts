@@ -5,6 +5,7 @@ import { Dispatch } from "redux"
 import { AppRootStateType } from "../../../app/state/store"
 import { setAppErrorAC, setAppStatusAC } from "../../../app/app-reducer"
 import { handleServerAppError, handleServerNetworkError } from "../../../utils/error-utils"
+import { SetThemeActionType } from "../../../app/theme-reducer"
 
 
 export type TasksStateType = {
@@ -19,6 +20,7 @@ type ActionsType = ReturnType<typeof removeTaskAC>
   | SetTodolistsActionType 
   | ReturnType<typeof setTasksAC>
   | ClearTodosDataActionType
+
 
   export type UpdateDomainTaskType = {
     title?: string

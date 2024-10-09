@@ -3,6 +3,7 @@ import { todolistAPI, TodolistType } from '../../../api/todolist-api';
 import { Dispatch } from "redux";
 import { RequestStatusType, setAppStatusAC } from '../../../app/app-reducer';
 import { fetchTasksTC } from './tasks-reducer';
+import { SetThemeActionType } from '../../../app/theme-reducer';
 
 export type FilterValuesType = 'all' | 'active' | 'completed';
 

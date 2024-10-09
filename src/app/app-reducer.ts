@@ -1,3 +1,5 @@
+import { SetThemeActionType } from "./theme-reducer"
+
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export type InitialStateType = {
@@ -18,7 +20,7 @@ export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type SetIsInitializedActionType = ReturnType<typeof setIsInitializedAC>
 
-type ActionsType = SetAppStatusActionType | SetAppErrorActionType | SetIsInitializedActionType
+type ActionsType = SetAppStatusActionType | SetAppErrorActionType | SetIsInitializedActionType 
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {

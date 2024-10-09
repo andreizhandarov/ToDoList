@@ -1,6 +1,6 @@
 import AppBar from '@mui/material/AppBar';
 import './App.css';
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -13,16 +13,16 @@ import { CircularProgress, LinearProgress } from '@mui/material';
 import { ErrorSnackbar } from '../components/ErrorSnackbar/ErrorSnackbar';
 import { useAppDispatch, useAppSelector } from './state/store';
 import { RequestStatusType } from './app-reducer';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { logOutTC, meTC } from '../features/Login/auth-reducer';
-
-type ThemeMode = 'dark' | 'light'
+import { setThemeTC, ThemeModes } from './theme-reducer';
 
 function AppWithRedux() {
 	const dispatch = useAppDispatch()
 	const status = useAppSelector<RequestStatusType>(state => state.app.status)
 	const isInitialized = useAppSelector<boolean>(state => state.app.isInitialized)
 	const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+	const ThemeMode = useAppSelector<string>(state => state.theme.mode)
 
 	const logOut = () => {
 		dispatch(logOutTC())
@@ -33,19 +33,18 @@ function AppWithRedux() {
 	}, [])
 
 	//UI
-	const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+	const onChangeHandler = () => {
+		dispatch(setThemeTC(ThemeMode === 'light' ? 'dark' : 'light'))
+	}
+
 	const theme = createTheme({
 		palette: {
-			mode: themeMode === 'light' ? 'light' : 'dark',
+			mode: ThemeMode as ThemeModes,
 			primary: {
 				main: '#ef6c00',
 			},
 		},
 	})
-
-	const onChangeHandler = () => {
-		setThemeMode(themeMode == 'light' ? 'dark' : 'light')
-	}
 
 	if(!isInitialized){
 		return (

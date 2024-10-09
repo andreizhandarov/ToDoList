@@ -6,6 +6,7 @@ import { tasksReducer } from '../../features/TodolistsList/model/tasks-reducer';
 import { todolistsReducer } from '../../features/TodolistsList/model/todolists-reducer';
 import { appReducer } from '../app-reducer';
 import { authReducer } from '../../features/Login/auth-reducer';
+import { themeReducer } from '../theme-reducer';
 
 
 // объединяя reducer-ы с помощью combineReducers,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
     app: appReducer,
-    auth: authReducer
+    auth: authReducer,
+    theme: themeReducer
 })
 // непосредственно создаём store
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk) as any);
