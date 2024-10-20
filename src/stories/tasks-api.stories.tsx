@@ -20,7 +20,7 @@ export const CreateTask = () => {
   const [state, setState] = useState<any>(null);
   useEffect(() => {
     const todolistId = "eb48a1fa-f2dc-4e35-8718-9971b048927e";
-    taskAPI.createTask(todolistId, "NewTask2").then((res) => {
+    taskAPI.createTask({todolistId, title: "NewTask2"}).then((res) => {
       setState(res.data);
     });
   }, []);

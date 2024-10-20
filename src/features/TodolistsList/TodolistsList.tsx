@@ -8,7 +8,7 @@ import {
   getTodolistsTC,
   TodolistDomainType,
 } from "./model/todolistsSlice"
-import { addTaskTC, removeTaskTC, TasksStateType, updateTaskTC } from "./model/tasksSlice"
+import { addTask, removeTask, TasksStateType, updateTask } from "./model/tasksSlice"
 import Grid from "@mui/material/Unstable_Grid2"
 import Paper from "@mui/material/Paper"
 import { Todolist } from "./Todolist/Todolist"
@@ -31,20 +31,20 @@ export const TodolistsList: React.FC = () => {
   }, [])
 
   //Tasks
-  const removeTask = useCallback((taskId: string, todolistId: string) => {
-    dispatch(removeTaskTC(taskId, todolistId))
+  const removeTaskCallback = useCallback((taskId: string, todolistId: string) => {
+    dispatch(removeTask({taskId, todolistId}))
   }, [])
 
-  const addTask = useCallback((title: string, todolistId: string) => {
-    dispatch(addTaskTC(title, todolistId))
+  const addTaskCallback = useCallback((title: string, todolistId: string) => {
+    dispatch(addTask({title, todolistId}))
   }, [])
 
   const changeTaskStatus = useCallback((taskId: string, status: TaskStatuses, todolistId: string) => {
-    dispatch(updateTaskTC(todolistId, taskId, { status }))
+    dispatch(updateTask({todolistId, taskId, domainModel:{ status }}))
   }, [])
 
   const changeTaskTitle = useCallback((taskId: string, title: string, todolistId: string) => {
-    dispatch(updateTaskTC(todolistId, taskId, { title }))
+    dispatch(updateTask({todolistId, taskId, domainModel:{ title }}))
   }, [])
 
   //ToDoLista
@@ -85,9 +85,9 @@ export const TodolistsList: React.FC = () => {
                 <Todolist
                   todolist={tl}
                   tasks={tasksForTodolist}
-                  removeTask={removeTask}
+                  removeTask={removeTaskCallback}
                   changeFilter={changeFilter}
-                  addTask={addTask}
+                  addTask={addTaskCallback}
                   changeTaskStatus={changeTaskStatus}
                   removeTodolist={removeTodolist}
                   changeTaskTitle={changeTaskTitle}

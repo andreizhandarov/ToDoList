@@ -1,4 +1,4 @@
-import { fetchTasksTC } from "./tasksSlice"
+import { fetchTasks } from "./tasksSlice"
 import { RequestStatusType, setAppStatus } from "app/app-reducer"
 import { todolistAPI, TodolistType } from "api/todolist-api"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
@@ -69,7 +69,7 @@ export const getTodolistsTC = (): AppThunk => (dispatch) => {
     })
     .then((todos) => {
       todos.forEach((tl) => {
-        dispatch(fetchTasksTC(tl.id))
+        dispatch(fetchTasks(tl.id))
       })
     })
     .catch((error) => {
