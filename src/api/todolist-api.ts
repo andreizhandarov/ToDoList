@@ -89,6 +89,11 @@ export type RemoveTaskArg = {
   todolistId: string;
 }
 
+export type ChangeTodolistTitleArg = {
+  todolistId: string; 
+  title: string;
+}
+
 //api
 export const authAPI = {
   login(data: LoginType) {

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react"
 import {
-  addTodolistTC,
+  addTodolist,
   changeTodolistFilter,
-  changeTodolistTitleTC,
-  deleteTodolistTC,
+  changeTodolistTitle,
+  deleteTodolist,
+  fetchTodolists,
   FilterValuesType,
-  getTodolistsTC,
   TodolistDomainType,
 } from "./model/todolistsSlice"
 import { addTask, removeTask, TasksStateType, updateTask } from "./model/tasksSlice"
@@ -27,7 +27,7 @@ export const TodolistsList: React.FC = () => {
     if (!isLoggenIn) {
       return
     }
-    dispatch(getTodolistsTC())
+    dispatch(fetchTodolists())
   }, [])
 
   //Tasks
@@ -48,8 +48,8 @@ export const TodolistsList: React.FC = () => {
   }, [])
 
   //ToDoLista
-  const addTodolist = useCallback((title: string) => {
-    dispatch(addTodolistTC(title))
+  const addTodolistCallback = useCallback((title: string) => {
+    dispatch(addTodolist(title))
   }, [])
 
   const changeFilter = useCallback(
@@ -57,12 +57,12 @@ export const TodolistsList: React.FC = () => {
       dispatch(changeTodolistFilter({todolistId, filter}))
     }, [])
 
-  const changeTodolistTitle = useCallback((title: string, todolistId: string) => {
-    dispatch(changeTodolistTitleTC(todolistId, title))
+  const changeTodolistTitleCallback = useCallback((title: string, todolistId: string) => {
+    dispatch(changeTodolistTitle({todolistId, title}))
   }, [])
 
   const removeTodolist = useCallback((todolistId: string) => {
-    dispatch(deleteTodolistTC(todolistId))
+    dispatch(deleteTodolist(todolistId))
   }, [])
 
   if (!isLoggenIn) {
@@ -72,7 +72,7 @@ export const TodolistsList: React.FC = () => {
   return (
     <>
       <Grid container sx={{ p: "15px 0" }}>
-        <AddItemForm addItem={addTodolist} />
+        <AddItemForm addItem={addTodolistCallback} />
       </Grid>
 
       <Grid container spacing={4}>
@@ -91,7 +91,7 @@ export const TodolistsList: React.FC = () => {
                   changeTaskStatus={changeTaskStatus}
                   removeTodolist={removeTodolist}
                   changeTaskTitle={changeTaskTitle}
-                  changeTodolistTitle={changeTodolistTitle}
+                  changeTodolistTitle={changeTodolistTitleCallback}
                 />
               </Paper>
             </Grid>

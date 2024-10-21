@@ -1,6 +1,6 @@
 import { TaskPriorities, TaskStatuses, TaskType } from "api/todolist-api";
 import { addTask, fetchTasks, removeTask, tasksReducer, TasksStateType, updateTask } from "./tasksSlice";
-import { addTodolist, removeTodolist, setTodolists } from "./todolistsSlice";
+import { addTodolist, deleteTodolist, fetchTodolists} from "./todolistsSlice";
 import { TestAction } from "common/types/types";
 
 let startState: TasksStateType = {};
@@ -165,14 +165,18 @@ test("title of specified task should be changed", () => {
 });
 
 test("new array should be added when new todolist is added", () => {
-  const action = addTodolist({
-    todolist: {
-      id: "blabla",
-      title: "new todolist",
-      order: 0,
-      addedDate: "",
-    },
-  });
+
+  const action: TestAction<typeof addTodolist.fulfilled> = {
+    type: addTodolist.fulfilled.type,
+    payload: {
+      todolist: {
+        id: "blabla",
+        title: "new todolist",
+        order: 0,
+        addedDate: "",
+      }
+    }
+  }
 
   const endState = tasksReducer(startState, action);
 
@@ -187,7 +191,12 @@ test("new array should be added when new todolist is added", () => {
 });
 
 test("propertry with todolistId should be deleted", () => {
-  const action = removeTodolist({ todolistId: "todolistId2" });
+  const action: TestAction<typeof deleteTodolist.fulfilled> = {
+    type: deleteTodolist.fulfilled.type,
+    payload: {
+      todolistId: "todolistId2"
+    }
+  }
 
   const endState = tasksReducer(startState, action);
 
@@ -198,12 +207,15 @@ test("propertry with todolistId should be deleted", () => {
 });
 
 test("empty arrays should be added when we set todolists", () => {
-  const action = setTodolists({
-    todolists: [
-      { id: "1", title: "title 1", order: 0, addedDate: "" },
-      { id: "2", title: "title 2", order: 0, addedDate: "" },
-    ],
-  });
+  const action: TestAction<typeof fetchTodolists.fulfilled> = {
+    type: fetchTodolists.fulfilled.type,
+    payload: {
+      todolists: [
+        { id: "1", title: "title 1", order: 0, addedDate: "" },
+        { id: "2", title: "title 2", order: 0, addedDate: "" },
+      ]
+    }
+  }
 
   const endState = tasksReducer({}, action);
 

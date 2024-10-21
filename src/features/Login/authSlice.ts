@@ -5,6 +5,7 @@ import { handleServerAppError, handleServerNetworkError } from "utils/error-util
 import { authAPI } from "api/todolist-api"
 import { setAppStatus, setIsInitialized } from "app/app-reducer"
 import { clearTasksAndTodolists } from "common/actions/common.actions"
+import { ResultCode } from "common/enums/enums"
 
 const authSlice = createSlice({
   name: "auth",
@@ -24,7 +25,7 @@ export const loginTC = (data: LoginType): AppThunk => (dispatch) => {
     dispatch(setAppStatus({ status: "loading" }))
     authAPI.login(data)
     .then((res) => {
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.success) {
         dispatch(setIsLoggedIn({ isLoggedIn: true }))
         dispatch(setAppStatus({ status: "succeeded" }))
       }else{
@@ -40,7 +41,7 @@ export const logOutTC = (): AppThunk => (dispatch) => {
   dispatch(setAppStatus({ status: "loading" }))
   authAPI.logOut()
   .then((res) => {
-    if (res.data.resultCode === 0) {
+    if (res.data.resultCode === ResultCode.success) {
       dispatch(setIsLoggedIn({ isLoggedIn: false }))
       dispatch(setAppStatus({ status: "succeeded" }))
       dispatch(clearTasksAndTodolists())
@@ -57,7 +58,7 @@ export const meTC = (): AppThunk => (dispatch) => {
   dispatch(setAppStatus({ status: "loading" }))
   authAPI.me()
   .then((res) => {
-    if (res.data.resultCode === 0) {
+    if (res.data.resultCode === ResultCode.success) {
       dispatch(setIsLoggedIn({ isLoggedIn: true }))
       dispatch(setAppStatus({ status: "succeeded" }))
     }else{

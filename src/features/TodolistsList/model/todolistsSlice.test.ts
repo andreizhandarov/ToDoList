@@ -1,7 +1,8 @@
 import { v1 } from "uuid";
-import { addTodolist, changeTodolistEntityStatus, changeTodolistFilter, changeTodolistTitle, FilterValuesType, removeTodolist, setTodolists, TodolistDomainType, todolistsReducer } from "./todolistsSlice";
+import { addTodolist, changeTodolistEntityStatus, changeTodolistFilter, changeTodolistTitle, deleteTodolist, fetchTodolists, FilterValuesType, TodolistDomainType, todolistsReducer } from "./todolistsSlice";
 import { TodolistType } from "api/todolist-api";
 import { RequestStatusType } from "app/app-reducer";
+import { TestAction } from "common/types/types";
 
 
 let todolistId1: string;
@@ -18,7 +19,14 @@ beforeEach(() => {
 });
 
 test("correct todolist should be removed", () => {
-  const endState = todolistsReducer(startState, removeTodolist({ todolistId: todolistId1 }));
+  const action: TestAction<typeof deleteTodolist.fulfilled> = {
+    type: deleteTodolist.fulfilled.type,
+    payload: {
+      todolistId: todolistId1
+    }
+  }
+
+  const endState = todolistsReducer(startState, action);
 
   expect(endState.length).toBe(1);
   expect(endState[0].id).toBe(todolistId2);
@@ -32,7 +40,14 @@ test("correct todolist should be added", () => {
     order: 0,
   };
 
-  const endState = todolistsReducer(startState, addTodolist({ todolist }));
+  const action: TestAction<typeof addTodolist.fulfilled> = {
+    type: addTodolist.fulfilled.type,
+    payload: {
+      todolist
+    }
+  }
+
+  const endState = todolistsReducer(startState, action);
 
   expect(endState.length).toBe(3);
   expect(endState[0].title).toBe(todolist.title);
@@ -42,7 +57,13 @@ test("correct todolist should be added", () => {
 test("correct todolist should change its name", () => {
   let newTodolistTitle = "New Todolist";
 
-  const action = changeTodolistTitle({ todolistId: todolistId2, title: newTodolistTitle });
+  const action: TestAction<typeof changeTodolistTitle.fulfilled> = {
+    type: changeTodolistTitle.fulfilled.type,
+    payload: {
+      todolistId: todolistId2, 
+      title: newTodolistTitle
+    }
+  }
 
   const endState = todolistsReducer(startState, action);
 
@@ -62,7 +83,13 @@ test("correct filter of todolist should be changed", () => {
 });
 
 test("todolists should be added", () => {
-  const action = setTodolists({ todolists: startState });
+
+  const action: TestAction<typeof fetchTodolists.fulfilled> = {
+    type: fetchTodolists.fulfilled.type,
+    payload: {
+      todolists: startState
+    }
+  }
 
   const endState = todolistsReducer([], action);
 
