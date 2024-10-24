@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react"
-import { AddItemForm } from "../../../components/AddItemForm/AddItemForm"
-import { EditableSpan } from "../../../components/EditableSpan/EditableSpan"
+import { AddItemForm } from "../../../common/components/AddItemForm/AddItemForm"
+import { EditableSpan } from "../../../common/components/EditableSpan/EditableSpan"
 import Button from "@mui/material/Button"
 import IconButton from "@mui/material/IconButton"
 import { Delete } from "@mui/icons-material"
@@ -8,9 +8,11 @@ import List from "@mui/material/List"
 import Box from "@mui/material/Box"
 import { filterButtonsContainerSx } from "./Todolist.style"
 import React from "react"
-import { TaskWithRedux } from "./Task/TaskWithRedux"
+import { Task } from "./Task/Task"
 import { FilterValuesType, TodolistDomainType } from "../model/todolistsSlice"
-import { TaskStatuses, TaskType } from "../../../api/todolist-api"
+import { TaskType } from "./Task/task.api"
+import { TaskStatuses } from "common/enums/enums"
+
 
 type PropsType = {
   todolist: TodolistDomainType
@@ -90,7 +92,7 @@ export const Todolist = React.memo((props: PropsType) => {
       ) : (
         <List>
           {tasksForTodolist?.map((task) => (
-            <TaskWithRedux
+            <Task
               key={task.id}
               task={task}
               todolistId={todolist.id}

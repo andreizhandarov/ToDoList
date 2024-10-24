@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk } from "./state/store";
+import { AppThunk } from "app/state/store";
+
 
 export type ThemeModes = "dark" | "light";
 

@@ -1,8 +1,8 @@
 import { v1 } from "uuid";
 import { addTodolist, changeTodolistEntityStatus, changeTodolistFilter, changeTodolistTitle, deleteTodolist, fetchTodolists, FilterValuesType, TodolistDomainType, todolistsReducer } from "./todolistsSlice";
-import { TodolistType } from "api/todolist-api";
-import { RequestStatusType } from "app/app-reducer";
 import { TestAction } from "common/types/types";
+import { TodolistType } from "../Todolist/todolist.api";
+import { RequestStatusType } from "app/appSlice";
 
 
 let todolistId1: string;

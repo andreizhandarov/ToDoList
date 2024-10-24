@@ -9,8 +9,9 @@ import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import { useFormik } from "formik"
 import { loginTC } from "./authSlice"
-import { useAppDispatch, useAppSelector } from "../../app/state/store"
 import { Navigate } from "react-router-dom"
+import { useAppDispatch } from "common/hooks/useAppDispatch"
+import { useAppSelector } from "common/hooks/useAppSelector"
 
 type FormikErrorType = {
   email?: string
