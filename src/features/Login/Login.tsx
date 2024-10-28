@@ -8,7 +8,7 @@ import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import { useFormik } from "formik"
-import { loginTC } from "./authSlice"
+import { login } from "./authSlice"
 import { Navigate } from "react-router-dom"
 import { useAppDispatch } from "common/hooks/useAppDispatch"
 import { useAppSelector } from "common/hooks/useAppSelector"
@@ -55,7 +55,7 @@ export const Login = () => {
     validate,
     onSubmit: (values) => {
       //  alert(JSON.stringify(values))
-      dispatch(loginTC(values))
+      dispatch(login(values))
       formik.resetForm()
     },
   })

@@ -1,5 +1,5 @@
 import { instance } from "common/api/common.api";
-import {ResponseType} from "common/types/types"
+import {BaseResponse} from "common/types/types"
 
 //type
 export type TodolistType = {
@@ -20,13 +20,13 @@ export const todolistAPI = {
         return instance.get<TodolistType[]>(`todo-lists`);
     },
     createTodolist(title: string) {
-        return instance.post<ResponseType<{ item: TodolistType }>>(`todo-lists`, {title});
+        return instance.post<BaseResponse<{ item: TodolistType }>>(`todo-lists`, {title});
 },
     deleteTodolist(todolistId: string) {
-    return instance.delete<ResponseType>(`todo-lists/${todolistId}`);
+    return instance.delete<BaseResponse>(`todo-lists/${todolistId}`);
 },
     updateTodolist(todolistId: string, title: string) {
-        return instance.put<ResponseType>(`todo-lists/${todolistId}`, { title });
+        return instance.put<BaseResponse>(`todo-lists/${todolistId}`, { title });
     },
 };
 

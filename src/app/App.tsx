@@ -13,7 +13,7 @@ import { CircularProgress, LinearProgress } from "@mui/material"
 import { ErrorSnackbar } from "../common/components/ErrorSnackbar/ErrorSnackbar"
 import { RequestStatusType } from "./appSlice"
 import { Outlet } from "react-router-dom"
-import { logOutTC, meTC } from "../features/Login/authSlice"
+import { logout, me } from "../features/Login/authSlice"
 import { useAppDispatch } from "common/hooks/useAppDispatch"
 import { useAppSelector } from "common/hooks/useAppSelector"
 import { setThemeTC, ThemeModes } from "features/Theme/themeSlice"
@@ -25,13 +25,15 @@ function App() {
   const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn)
   const ThemeMode = useAppSelector<string>((state) => state.theme.mode)
 
-  const logOut = () => {
-    dispatch(logOutTC())
-  }
+
 
   useEffect(() => {
-    dispatch(meTC())
+    dispatch(me())
   }, [])
+
+  const logOut = () => {
+    dispatch(logout())
+  }
 
   //UI
   const onChangeHandler = () => {

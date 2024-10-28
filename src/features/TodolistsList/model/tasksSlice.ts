@@ -1,4 +1,4 @@
-import { handleServerAppError, handleServerNetworkError } from "common/utils/error-utils"
+import { handleServerAppError } from "common/utils/handle-server-app-error"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { addTodolist, deleteTodolist, fetchTodolists } from "./todolistsSlice"
 import { clearTasksAndTodolists } from "common/actions/common.actions"
@@ -6,6 +6,7 @@ import { createAppAsyncThunk } from "common/utils/createAppAsyncThunk"
 import { ResultCode, TaskPriorities, TaskStatuses } from "common/enums/enums"
 import { AddTaskArgs, RemoveTaskArg, taskAPI, TaskType, UpdateTaskArg, UpdateTaskType } from "../Todolist/Task/task.api"
 import { setAppStatus } from "app/appSlice"
+import { handleServerNetworkError } from "common/utils/handle-server-network-error"
 
 export type TasksStateType = {
   [todolistId: string]: TaskType[]

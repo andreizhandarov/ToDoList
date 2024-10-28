@@ -1,8 +1,9 @@
 import { AxiosResponse } from "axios";
 import { instance } from "common/api/common.api";
 import { TaskPriorities, TaskStatuses } from "common/enums/enums";
+import { BaseResponse } from "common/types/types";
 import { UpdateDomainTaskType } from "features/TodolistsList/model/tasksSlice";
-import {ResponseType} from "common/types/types"
+
 
 export type TaskType = {
     description: string;
@@ -54,7 +55,7 @@ export const taskAPI = {
     },
     createTask(arg: AddTaskArgs) {
         const {todolistId, title} = arg
-        return instance.post<ResponseType<{ item: TaskType }>>(
+        return instance.post<BaseResponse<{ item: TaskType }>>(
         `todo-lists/${todolistId}/tasks`, { title });
     },
     deleteTask(todolistId: string, taskId: string) {
@@ -63,8 +64,8 @@ export const taskAPI = {
     },
     updateTask(todolistId: string, taskId: string, apiModel: UpdateTaskType) {
         return instance.put<
-        ResponseType<{ item: TaskType }>,
-        AxiosResponse<ResponseType<{ item: TaskType }>>,
+        BaseResponse<{ item: TaskType }>,
+        AxiosResponse<BaseResponse<{ item: TaskType }>>,
         UpdateTaskType
         >(`todo-lists/${todolistId}/tasks/${taskId}`, apiModel);
     },

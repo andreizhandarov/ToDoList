@@ -1,4 +1,4 @@
-import { AppThunkDispatch } from "app/state/store";
+import { AppDispatch } from "app/state/store";
 import { useDispatch } from "react-redux";
 
-export const useAppDispatch = () => useDispatch<AppThunkDispatch>()
+export const useAppDispatch = () => useDispatch<AppDispatch>()

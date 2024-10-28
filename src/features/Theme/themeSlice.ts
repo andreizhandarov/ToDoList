@@ -1,6 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk } from "app/state/store";
-
+import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 
 export type ThemeModes = "dark" | "light";
 
@@ -11,13 +9,13 @@ const themeSlice = createSlice({
     setTheme: (state, action: PayloadAction<{mode: ThemeModes}>) => {
       state.mode = action.payload.mode
     }
-  }
+  },
 })
 
 export const themeReducer = themeSlice.reducer
 export const {setTheme} = themeSlice.actions
 
 // thunks
-export const setThemeTC = (theme: ThemeModes): AppThunk => (dispatch) => {
+export const setThemeTC = (theme: ThemeModes) => (dispatch: Dispatch) => {
     dispatch(setTheme({mode: theme}));
   };
