@@ -1,6 +1,5 @@
 import { Dispatch } from "redux";
 import { BaseResponse } from "../types/types";
-import axios from "axios";
 import { setAppError, setAppStatus } from "app/appSlice";
 
 export const handleServerAppError = <D>(data: BaseResponse<D>, dispatch: Dispatch) => {

@@ -2,8 +2,6 @@ import { AxiosResponse } from "axios";
 import { instance } from "common/api/common.api";
 import { TaskPriorities, TaskStatuses } from "common/enums/enums";
 import { BaseResponse } from "common/types/types";
-import { UpdateDomainTaskType } from "features/TodolistsList/model/tasksSlice";
-
 
 export type TaskType = {
     description: string;
@@ -40,7 +38,7 @@ export type AddTaskArgs = {
 
 export type UpdateTaskArg = {
     taskId: string; 
-    domainModel: UpdateDomainTaskType; 
+    domainModel: Partial<UpdateTaskType>; 
     todolistId: string;
 }
 

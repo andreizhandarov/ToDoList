@@ -13,12 +13,6 @@ import { Navigate } from "react-router-dom"
 import { useAppDispatch } from "common/hooks/useAppDispatch"
 import { useAppSelector } from "common/hooks/useAppSelector"
 
-type FormikErrorType = {
-  email?: string
-  password?: string
-  rememberMe?: boolean
-}
-
 export type LoginType = {
   email: string
   password: string
@@ -27,8 +21,8 @@ export type LoginType = {
 
 const regExp = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i)
 
-const validate = (values: any) => {
-  const errors: FormikErrorType = {}
+const validate = (values: LoginType) => {
+  const errors: Partial<LoginType> = {}
   if (!values.email) {
     errors.email = "Email is required"
   } else if (!regExp.test(values.email)) {
@@ -37,7 +31,7 @@ const validate = (values: any) => {
   if (!values.password) {
     errors.password = "Password is required"
   } else if (values.password.length < 4) {
-    errors.password = "Password must be at least 6 characters"
+    errors.password = "Password must be at least 4 characters"
   }
   return errors
 }
@@ -54,7 +48,6 @@ export const Login = () => {
     },
     validate,
     onSubmit: (values) => {
-      //  alert(JSON.stringify(values))
       dispatch(login(values))
       formik.resetForm()
     },
@@ -102,7 +95,7 @@ export const Login = () => {
                 label={"Remember me"}
                 control={<Checkbox checked={formik.values.rememberMe} {...formik.getFieldProps("rememberMe")} />}
               />
-              <Button type={"submit"} variant={"contained"} color={"primary"}>
+              <Button type={"submit"} variant={"contained"} color={"primary"} disabled={!!formik.errors.email || !!formik.errors.password}>
                 Login
               </Button>
             </FormGroup>

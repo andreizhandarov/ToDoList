@@ -131,11 +131,4 @@ export const Todolist = React.memo((props: PropsType) => {
   )
 })
 
-//Мемоизация компоненты Button из Material UI c расширением для типизации
-// type ButtonMemoPropsType = ButtonProps & {}
-// const ButtonMemo = React.memo(({variant, onClick, color, children, ...rest}: ButtonMemoPropsType) => {
-// 	return <Button variant={variant} onClick={onClick} color={color} {...rest}>{children}</Button>
-// })
-
-//или еще вариатн
 const ButtonMemo = React.memo(Button)
