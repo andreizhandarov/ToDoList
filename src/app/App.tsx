@@ -16,7 +16,7 @@ import { Outlet } from "react-router-dom"
 import { logout, me } from "../features/Login/authSlice"
 import { useAppDispatch } from "common/hooks/useAppDispatch"
 import { useAppSelector } from "common/hooks/useAppSelector"
-import { setThemeTC, ThemeModes } from "features/Theme/themeSlice"
+import { themeMode, ThemeModes } from "features/Theme/themeSlice"
 
 function App() {
   const dispatch = useAppDispatch()
@@ -24,8 +24,6 @@ function App() {
   const isInitialized = useAppSelector<boolean>((state) => state.app.isInitialized)
   const isLoggedIn = useAppSelector<boolean>((state) => state.auth.isLoggedIn)
   const ThemeMode = useAppSelector<string>((state) => state.theme.mode)
-
-
 
   useEffect(() => {
     dispatch(me())
@@ -37,7 +35,7 @@ function App() {
 
   //UI
   const onChangeHandler = () => {
-    dispatch(setThemeTC(ThemeMode === "light" ? "dark" : "light"))
+    dispatch(themeMode(ThemeMode === "light" ? "dark": "light"))
   }
 
   const theme = createTheme({
@@ -75,7 +73,7 @@ function App() {
           </IconButton>
           <div>
             {isLoggedIn && <MenuButton onClick={logOut}>Logout</MenuButton>}
-            <MenuButton sx={{ background: "#ab47bc" }}>FAQ</MenuButton>
+            {!isLoggedIn && <MenuButton sx={{ background: "#ab47bc" }}>FAQ</MenuButton>}
             <Switch color={"default"} onChange={onChangeHandler} />
           </div>
         </Toolbar>

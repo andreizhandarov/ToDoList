@@ -61,9 +61,9 @@ export const Login = () => {
     <Grid container justifyContent={"center"}>
       <Grid item justifyContent={"center"}>
         <FormControl>
-          <FormLabel>
+          <FormLabel style={{ color: "#ef6c00" }}>
             <p>
-              To log in get registered
+              To log in get registered{" "}
               <a href={"https://social-network.samuraijs.com/"} target={"_blank"}>
                 here
               </a>
@@ -95,7 +95,11 @@ export const Login = () => {
                 label={"Remember me"}
                 control={<Checkbox checked={formik.values.rememberMe} {...formik.getFieldProps("rememberMe")} />}
               />
-              <Button type={"submit"} variant={"contained"} color={"primary"} disabled={!!formik.errors.email || !!formik.errors.password}>
+              <Button type={"submit"} 
+                      variant={"contained"} 
+                      color={"primary"} 
+                      disabled={(!formik.values.email || !formik.values.password)}
+                      >
                 Login
               </Button>
             </FormGroup>

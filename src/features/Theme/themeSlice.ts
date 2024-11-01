@@ -1,4 +1,4 @@
-import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
+import { createAction, createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 
 export type ThemeModes = "dark" | "light";
 
@@ -16,6 +16,8 @@ export const themeReducer = themeSlice.reducer
 export const {setTheme} = themeSlice.actions
 
 // thunks
-export const setThemeTC = (theme: ThemeModes) => (dispatch: Dispatch) => {
+export const themeMode = (theme: ThemeModes) => (dispatch: Dispatch) => {
     dispatch(setTheme({mode: theme}));
   };
+
+
