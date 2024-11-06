@@ -4,10 +4,11 @@ import "./index.css"
 import { Provider } from "react-redux"
 import { store } from "./app/state/store"
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom"
-import { Login } from "./features/Login/Login"
-import { TodolistsList } from "./features/TodolistsList/TodolistsList"
 import { ErrorPage } from "./common/components/ErrorPage/ErrorPage"
 import App from "./app/App"
+import { Login } from "features/Login/ui/Login"
+import { TodolistsList } from "features/TodolistsList/ui/TodolistsList"
+
 
 const router = createBrowserRouter([
   {

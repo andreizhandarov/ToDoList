@@ -3,10 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { addTodolist, deleteTodolist, fetchTodolists } from "./todolistsSlice"
 import { clearTasksAndTodolists } from "common/actions/common.actions"
 import { createAppAsyncThunk } from "common/utils/createAppAsyncThunk"
-import { ResultCode} from "common/enums/enums"
-import { AddTaskArgs, RemoveTaskArg, taskAPI, TaskType, UpdateTaskArg, UpdateTaskType } from "../Todolist/Task/task.api"
+import { ResultCode } from "common/enums/enums"
 import { setAppStatus } from "app/appSlice"
 import { handleServerNetworkError } from "common/utils/handle-server-network-error"
+import { AddTaskArgs, RemoveTaskArg, TaskType, UpdateTaskArg, UpdateTaskType } from "../api/taskApiTypes"
+import { taskAPI } from "../api/task.api"
 
 export type TasksStateType = Record<string, TaskType[]>
 

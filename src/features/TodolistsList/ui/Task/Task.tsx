@@ -3,33 +3,33 @@ import ListItem from "@mui/material/ListItem"
 import Checkbox from "@mui/material/Checkbox"
 import IconButton from "@mui/material/IconButton"
 import { Delete } from "@mui/icons-material"
-import { getListItemSx } from "../Todolist.style"
 import { EditableSpan } from "common/components/EditableSpan/EditableSpan"
-import { TaskType } from "./task.api"
 import { TaskStatuses } from "common/enums/enums"
+import { getListItemSx } from "../Todolist/Todolist.style"
+import { TaskType } from "features/TodolistsList/api/taskApiTypes"
+import { useAppDispatch } from "common/hooks/useAppDispatch"
+import { removeTask, updateTask } from "features/TodolistsList/model/tasksSlice"
 
-type TaskPropsType = {
+type Props = {
   task: TaskType
   todolistId: string
-  removeTask: (taskId: string, todolistId: string) => void
-  changeTaskStatus: (taskId: string, status: TaskStatuses, todolistId: string) => void
-  changeTaskTitle: (taskId: string, title: string, todolistId: string) => void
 }
 
-export const Task = React.memo((props: TaskPropsType) => {
-  const { task, todolistId, removeTask, changeTaskStatus, changeTaskTitle } = props
+export const Task = React.memo(({task, todolistId}: Props) => {
+
+  const dispatch = useAppDispatch()
 
   const removeTaskHandler = () => {
-    removeTask(task.id, todolistId)
+    dispatch(removeTask({ taskId: task.id, todolistId }))
   }
 
   const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const newStatusValue = e.currentTarget.checked
-    changeTaskStatus(task.id, newStatusValue ? TaskStatuses.Completed : TaskStatuses.New, todolistId)
+    const status = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
+    dispatch(updateTask({ todolistId, taskId: task.id, domainModel: { status } }))
   }
 
-  const changeTaskTitleCallback = (newTitle: string) => {
-    changeTaskTitle(task.id, newTitle, todolistId)
+  const changeTaskTitleHandler = (newTitle: string) => {
+    dispatch(updateTask({ todolistId, taskId: task.id, domainModel: { title: newTitle }}))
   }
 
   return (
@@ -40,7 +40,7 @@ export const Task = React.memo((props: TaskPropsType) => {
           checked={task.status === TaskStatuses.Completed}
           onChange={changeTaskStatusHandler}
         />
-        <EditableSpan title={task.title} changeTitle={changeTaskTitleCallback} />
+        <EditableSpan title={task.title} changeTitle={changeTaskTitleHandler} />
       </div>
 
       <IconButton onClick={removeTaskHandler}>

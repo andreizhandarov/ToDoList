@@ -1,18 +1,6 @@
 import { instance } from "common/api/common.api";
 import {BaseResponse} from "common/types/types"
-
-//type
-export type TodolistType = {
-    id: string;
-    title: string;
-    order: number;
-    addedDate: string;
-};
-
-export type ChangeTodolistTitleArg = {
-    todolistId: string; 
-    title: string;
-}
+import { TodolistType } from "./todolistApiTypes";
 
 //api
 export const todolistAPI = {

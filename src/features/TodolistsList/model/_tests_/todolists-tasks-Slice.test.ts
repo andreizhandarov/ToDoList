@@ -1,24 +1,24 @@
-import { TodolistType } from "../Todolist/todolist.api"
-import { tasksReducer, TasksStateType } from "./tasksSlice"
-import { addTodolist, TodolistDomainType, todolistsReducer } from "./todolistsSlice"
 import { TestAction } from "common/types/types"
+import { tasksReducer, TasksStateType } from "../tasksSlice"
+import { addTodolist, TodolistDomainType, todolistsReducer } from "../todolistsSlice"
+import { TodolistType } from "features/TodolistsList/api/todolistApiTypes"
 
 test("ids should be equals", () => {
   const startTasksState: TasksStateType = {}
   const startTodolistsState: TodolistDomainType[] = []
 
-  let todolist: TodolistType ={
+  let todolist: TodolistType = {
     title: "new todolist",
     id: "any id",
     addedDate: "",
-    order: 0
+    order: 0,
   }
 
   const action: TestAction<typeof addTodolist.fulfilled> = {
     type: addTodolist.fulfilled.type,
     payload: {
-      todolist
-    }
+      todolist,
+    },
   }
 
   const endTasksState = tasksReducer(startTasksState, action)

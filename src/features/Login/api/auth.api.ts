@@ -1,7 +1,7 @@
 import { instance } from "common/api/common.api"
-import { LoginType } from "./Login"
 import { AxiosResponse } from "axios"
 import { BaseResponse } from "common/types/types"
+import { LoginType } from "../lib/hooks/useLogin"
 
 export type UserType = {
   id: number
