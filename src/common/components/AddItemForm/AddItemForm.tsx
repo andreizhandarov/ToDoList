@@ -9,7 +9,7 @@ export type AddItemFormPropsType = {
   disabled?: boolean;
 };
 
-export const AddItemForm = React.memo(({ addItem, disabled = false }: AddItemFormPropsType) => {
+export const AddItemForm = ({ addItem, disabled = false }: AddItemFormPropsType) => {
     const [itemTitle, setItemTitle] = useState("");
     const [error, setError] = useState<string | null>(null);
 
@@ -57,5 +57,5 @@ export const AddItemForm = React.memo(({ addItem, disabled = false }: AddItemFor
         </IconButton>
       </div>
     );
-  },
-);
+  }
+

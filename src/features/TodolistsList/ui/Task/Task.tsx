@@ -15,7 +15,7 @@ type Props = {
   todolistId: string
 }
 
-export const Task = React.memo(({task, todolistId}: Props) => {
+export const Task = ({task, todolistId}: Props) => {
 
   const dispatch = useAppDispatch()
 
@@ -48,4 +48,4 @@ export const Task = React.memo(({task, todolistId}: Props) => {
       </IconButton>
     </ListItem>
   )
-})
+}
