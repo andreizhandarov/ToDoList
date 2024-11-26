@@ -3,9 +3,11 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import IconButton from "@mui/material/IconButton";
 import React from "react";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { BaseResponse } from "common/types/types";
 
 export type AddItemFormPropsType = {
-  addItem: (newTitle: string) => void;
+  addItem: (newTitle: string) => Promise<any>;
   disabled?: boolean;
 };
 
@@ -15,8 +17,14 @@ export const AddItemForm = ({ addItem, disabled = false }: AddItemFormPropsType)
 
     const addItemHandler = () => {
       if (itemTitle.trim() !== "") {
-        addItem(itemTitle.trim());
-        setItemTitle("");
+        addItem(itemTitle.trim())
+        .then(unwrapResult)
+        .then((res) =>{
+          setItemTitle("");
+        })
+        .catch((error: BaseResponse)=>{
+          setError(error.messages[0]);
+        })
       } else {
         setError("Title is required");
       }

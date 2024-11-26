@@ -1,13 +1,10 @@
 import { Dispatch } from "redux";
 import { BaseResponse } from "../types/types";
-import { setAppError, setAppStatus } from "app/appSlice";
+import { setAppError} from "app/appSlice";
 
-export const handleServerAppError = <D>(data: BaseResponse<D>, dispatch: Dispatch) => {
-  if (data.messages.length) {
-    dispatch(setAppError({error: data.messages[0]}));
-  } else {
-    dispatch(setAppError({error: "Some error occurred"}));
+export const handleServerAppError = <D>(data: BaseResponse<D>, dispatch: Dispatch, showError: boolean = true): void => {
+  if (showError) {
+    dispatch(setAppError({ error: data.messages.length ? data.messages[0] : "Some error occurred" }))
   }
-  dispatch(setAppStatus({status: "failed"}));
-};
+}
 

@@ -23,7 +23,7 @@ export const TodolistsList: React.FC = () => {
   }, [])
 
   const addTodolistHandler = (title: string) => {
-    dispatch(addTodolist(title))
+    return dispatch(addTodolist(title))
   }
 
   if (!isLoggenIn) {
